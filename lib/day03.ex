@@ -30,13 +30,7 @@ defmodule Day03 do
       6
       iex> Day03.offsetInRing(12, 2)
       13
-
-
-      iex> Day03.sideLengthForRing(2)
-      4
-      iex> Day03.sideLengthForRing(3)
-      6
-
+      
       iex> Day03.offsetInSide(12, 2)
       1
       iex> Day03.offsetInSide(23, 2)
@@ -81,32 +75,23 @@ defmodule Day03 do
     do 0  
   end
   def ring(n, r \\ 0) do
-
-    if Math.pow(ringToBase(r), 2) >= n do
+    if Math.pow(r*2+1, 2) >= n do
       r
     else
       ring(n, r+1)
     end
   end
 
-  def ringToBase(r) do
-    r*2+1
-  end
-
   def ringToCorner(r) do
-    round(Math.pow(ringToBase(r), 2))
+    round(Math.pow(r*2+1, 2))
   end
 
   def offsetInRing(n, r) do
     ringToCorner(ring(n, r)) - n
   end
 
-  def sideLengthForRing(r) do
-    r*2
-  end
-
   def offsetInSide(n, r) do
-    rem(offsetInRing(n, r), sideLengthForRing(r))
+    rem(offsetInRing(n, r), r*2)
   end
 
   def offsetFromCenterOfSide(sideLength, offsetInSide) do
@@ -119,10 +104,8 @@ defmodule Day03 do
 
   def dist(n) do
     ring = ring(n)
-    sideLength = sideLengthForRing(ring)
     offsetInSide = offsetInSide(n, ring)
-    sideLength = sideLengthForRing(ring)
-    offsetFromCenterOfSide = offsetFromCenterOfSide(sideLength, offsetInSide)
+    offsetFromCenterOfSide = offsetFromCenterOfSide(ring*2, offsetInSide)
     dist = ring + offsetFromCenterOfSide
     IO.puts("N: #{n} yields #{ring} + #{offsetFromCenterOfSide} = #{dist}")
     dist
