@@ -118,7 +118,13 @@ defmodule Day03 do
   end
 
   def dist(n) do
-    IO.puts("N: #{n} yields #{ring(n)} + #{offsetFromCenterOfSide(sideLengthForRing(ring(n)), offsetInSide(n, ring(n)))}")
-    ring(n) + offsetFromCenterOfSide(sideLengthForRing(ring(n)), offsetInSide(n, ring(n)))
+    ring = ring(n)
+    sideLength = sideLengthForRing(ring)
+    offsetInSide = offsetInSide(n, ring)
+    sideLength = sideLengthForRing(ring)
+    offsetFromCenterOfSide = offsetFromCenterOfSide(sideLength, offsetInSide)
+    dist = ring + offsetFromCenterOfSide
+    IO.puts("N: #{n} yields #{ring} + #{offsetFromCenterOfSide} = #{dist}")
+    dist
   end
 end
