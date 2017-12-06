@@ -54,8 +54,6 @@ defmodule Day03 do
       552
   """
 
-  import Math
-
   def ring(n, r \\ 0) do
     if Math.pow(r*2+1, 2) >= n do
       r
