@@ -21,7 +21,8 @@ defmodule Advent2017.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:math, "~> 0.3.0"}
+      {:math, "~> 0.3.0"},
+      {:dialyxir, "~> 0.5", only: [:dev], runtime: false}
     ]
   end
 end
